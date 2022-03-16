@@ -38,7 +38,7 @@ function initMap() {
     // Set coordinates of markers to places aroung Reading and title text for the markers
 
     const tourStops = [
-        [{ lat: 51.551505, lng: -1.1037961 }, "Charging Station 1"],
+        [{ lat: 51.851505, lng: -1.3037961 }, "Charging Station 1"],
         [{ lat: 51.451505, lng: -1.3037961 }, "Charging Station 2"],
         [{ lat: 51.351505, lng: -0.8000061 }, "Charging Station 3"],
         [{ lat: 51.251505, lng: -1.2737961 }, "Charging Station 4"],
@@ -77,16 +77,22 @@ function initMap() {
     dirRenderer.setMap(map);
 
     // highlight a street routes beteween locations
-    var request = {
-        origin: "51.551505,-1.1037961",
-        destination: "51.451505,-1.3037961",
-        travelMode: google.maps.TravelMode.DRIVING
-    };
-    dirService.route(request, function(result, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            dirRenderer.setDirections(result);
-        }
-    });
+
+    function toggleRoute() {
+
+        var request = {
+            origin: "51.551505,-1.1037961",
+            destination: "51.451505,-1.3037961",
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        dirService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                dirRenderer.setDirections(result);
+            }
+        });
+
+    }
+
 
     // Bicycle Image
 
@@ -100,11 +106,12 @@ function initMap() {
         });
     }
 
+    // Toggle All Markers
 
     // Hide markers.
     function hideMarkers() {
-        //location.reload();
-        showMarkers.setMapOnAll(null);
+        location.reload();
+        //showMarkers.setMapOnAll(null);
     };
 
     function toggleData() {
@@ -120,10 +127,26 @@ function initMap() {
         }
     }
 
+    // Toggle Bike Route
+
+    function toggleData2() {
+        if (toggleButton.innerHTML == "Show-Route") {
+            toggleButton.innerHTML = "Hide-Route"
+            showBike1()
+            const tourStops = []
+        } else if (toggleButton.innerHTML == "Hide-Route") {
+            toggleButton.innerHTML = "Show-Route";
+            showBike1()
+        } else {
+            null
+        }
+    }
+
     const toggleButton = document.getElementById("toggle-activity");
-    const toggleBike1 = document.getElementById("bike-1");
+    const toggleBike1 = document.getElementById("bike");
 
 
     toggleButton.addEventListener("click", toggleData)
     toggleButton.addEventListener("click", showBike1)
+    toggleButton.addEventListener("click", toggleRoute)
 }

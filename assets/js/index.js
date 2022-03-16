@@ -35,6 +35,7 @@ var users = [
 ]
 
 
+
 // List of DOM grabbers
 let typedUsername = document.getElementById("username");
 let typedPassoword = document.getElementById("password");
