@@ -64,7 +64,7 @@ nav.main-menu.expanded {
     position: absolute;
     top: 0;
     bottom: 0;
-    height: 610px;
+    height: 1000px;
     left: 0;
     width: 55px;
     overflow: hidden;
@@ -231,16 +231,6 @@ nav.main-menu li.active>a,
     width: 100%;
     background-color: red;
 }
-
-/* BEGINIG OF INNER PROFILE TAB*/
-.profile {
-    width: 300px;
-    height: 610px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 1px 0 3px 2px rgba(0, 0, 0, 0.2);
-    float: left
-}
 #cover {
     width: 150%;
     height: 100%;
@@ -318,55 +308,43 @@ nav.main-menu li.active>a,
     font-weight: bold;
 }
 #avatar {
-    width: 120px;
-    height: 120px;
-    position: absolute;
+    width: 100px;
+    height: 100px;
     z-index: 1;
     border: solid 5px rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     overflow: hidden;
-    margin: 20px;
     cursor: pointer;
     transition: .3s;
-}
-#info i {
-    font-size: 14pt;
-    margin: 0 5px;
-    color: #057091
+    display: contents;
 }
 #avatar img {
-    width: 100%;
+    margin: 10%;
+    width: 80%;
 }
 #avatar:hover {
     border: solid 3px rgba(255, 255, 255, 0.6);
 }
-#logo {
-    position: absolute;
-    top: 20px;
-    right: 23px;
-}
-#logo img {
-    width: 110px;
-    opacity: 0.6;
-}
-
-/* END OF INNER PROFILE TAB*/
-
-/*  #map {
-        position: absolute;
-        text-align: center;
-        color: white;
-        font-size: 1.5em;
-        width: 100%;
-        background-color: blue;
-        /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
 
 /* Set the size of the div element that contains the map */
 #map {
+    position: relative;
+    left: 56px;
     color: #000000;
-    height: 610px;
+    height: 1000px;
     width: -webkit-fill-available;
-    /* The height is 400 pixels */
-    /* The width is the width of the web page */
+}
+#profileDisp {
+    background-color: #ece9e9;
+    color: rgb(124, 124, 151);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: small;
+    padding: 15px;
+    line-height: 1.5rem;
+}
+#profileDisp li {
+    text-indent: 35px;
+    text-decoration: dashed;
+    font-size: x-small;
+    color: rgb(31, 29, 29);
 }

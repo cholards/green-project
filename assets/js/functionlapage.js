@@ -1,152 +1,146 @@
-console.log("O sishe");
-
+// Get cuurent logged in user credentials from storage
 let loggedinUserInfo = JSON.parse(localStorage.getItem("currentUser"));
+
+// check if user is logged to render page. If not, redirect user to login page
 if (loggedinUserInfo) {
-    // var loggedinStatus = document.getElementById("loggedinStatus");
-    var drvusername = document.getElementById("drv-username");
-    // loggedinStatus.innerHTML = loggedinUserInfo.user;
-    drvusername.innerHTML = "<h2>" + loggedinUserInfo.user + "</h2>";
+    let page = document.getElementById("page");
+    renderPage()
 } else {
-    "You are not logged-in and cannot view any content on this page"
-}
-console.log(loggedinUserInfo.user)
-
-var logOutButton = document.getElementById("logout-btn");
-
-
-logOutButton.addEventListener("click", clearData);
-
-
-
-function clearData() {
-    localStorage.clear();
-    window.location.replace("./index.html");
+    window.location.replace("../index.html");
 }
 
-// Begining of Map 
+// Render page function
+function renderPage() {
+
+    if (loggedinUserInfo) {
+        // Grab all DOM elements for profile
+        var drvimage = document.getElementById("drvimage");
+        var drvname = document.getElementById("drvname");
+        var trips = document.getElementById("trips");
+        var uniqueIdentity = document.getElementById("uniqueIdentity");
+
+
+
+
+        // Insert drivers details into DOM
+        drvimage.src = loggedinUserInfo.imageUrl;
+        drvname.innerHTML = "<h3>" + loggedinUserInfo.fullName + "</h3>";
+        trips.innerHTML = loggedinUserInfo.trips;
+        uniqueIdentity.innerHTML = loggedinUserInfo.uniqueIdentity;
+
+        // Iterate through driver's medals and insert into a list
+        for (let i = 0; i < loggedinUserInfo.medals.length; i++) {
+            let li = document.createElement('li');
+            var medalTxt = document.createTextNode(loggedinUserInfo.medals[i]);
+            li.appendChild(medalTxt);
+            var medals = document.getElementById("medals").appendChild(li);
+        }
+
+
+    } else {
+        "You are not logged-in and cannot view any content on this page"
+    }
+
+    var logOutButton = document.getElementById("logout-btn");
+    logOutButton.addEventListener("click", clearData);
+
+    function clearData() {
+        localStorage.clear();
+        window.location.replace("./index.html");
+    }
+}
+
+//Begining of Map functionality Reading
+
+//Define charging locations at Reading
+
+const neighborhoods = [
+    { lat: 51.4533, lng: -0.9634 },
+    { lat: 51.3838, lng: -1.1533 },
+    { lat: 51.317, lng: -0.860 },
+    { lat: 51.4281, lng: -0.8794 },
+];
+
+let markers = [];
+let map;
+
+// Render the map and markers
 
 function initMap() {
+    const reading = { lat: 51.3033, lng: -0.9634 },
+        map = new google.maps.Map(document.getElementById("map"), {
+            // Set map center at Reading
+            center: reading,
+            zoom: 11,
+        })
 
-    // Set location to Reading
-    const reading = { lat: 51.451505, lng: -1.0037961 };
-    // The map, centered at Reading
-    const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
-        center: reading,
+    document.getElementById("toggleChargingStations").addEventListener("click", drop);
+
+    // Set marker custom image to biycle
+    const image = "/assets/img/bicycle-icon.png";
+
+
+    const marker = new google.maps.Marker({
+        // The marker positioned at Reading
+        position: reading,
+        map: map,
+        // Set martker animation
+        // animation: google.maps.Animation.DROP,
+        icon: image,
+        draggable: true,
     });
 
-    // Set coordinates of markers to places aroung Reading and title text for the markers
-
-    const tourStops = [
-        [{ lat: 51.851505, lng: -1.3037961 }, "Charging Station 1"],
-        [{ lat: 51.451505, lng: -1.3037961 }, "Charging Station 2"],
-        [{ lat: 51.351505, lng: -0.8000061 }, "Charging Station 3"],
-        [{ lat: 51.251505, lng: -1.2737961 }, "Charging Station 4"],
-        [{ lat: 51.201505, lng: -0.7037961 }, "Charging Station 5"],
-    ];
-    // Info window for markers.
-    const infoWindow = new google.maps.InfoWindow();
-
-    // Create the markers.
-    function showMarkers() {
-        tourStops.forEach(([position, title], i) => {
-            const marker = new google.maps.Marker({
-                position,
-                map,
-                title: `${title}`,
-                label: `${i + 1}`,
-                optimized: false,
-            });
-
-        });
 
 
-        // Click listener for markers windows
-        marker.addListener("click", () => {
-            infoWindow.close();
-            infoWindow.setContent(marker.getTitle());
-            infoWindow.open(marker.getMap(), marker);
-        });
-
-    }
-
-
-    // Call init directions service
-    var dirService = new google.maps.DirectionsService();
-    var dirRenderer = new google.maps.DirectionsRenderer({ suppressMarkers: true });
-    dirRenderer.setMap(map);
-
-    // highlight a street routes beteween locations
-
-    function toggleRoute() {
-
-        var request = {
-            origin: "51.551505,-1.1037961",
-            destination: "51.451505,-1.3037961",
-            travelMode: google.maps.TravelMode.DRIVING
-        };
-        dirService.route(request, function(result, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                dirRenderer.setDirections(result);
-            }
-        });
-
-    }
+    const marker2 = new google.maps.Marker({
+        // The marker positioned at Reading
+        position: { lat: 51.3405, lng: -0.8794 },
+        map: map,
+        // Set martker animation
+        animation: google.maps.Animation.DROP,
+        icon: image,
+        draggable: true,
+    });
 
 
-    // Bicycle Image
 
-    function showBike1() {
-        const bike1 =
-            "./assets/img/bicycle-icon.png";
-        const beachMarker = new google.maps.Marker({
-            position: { lat: 51.551505, lng: -1.1037961 },
-            map,
-            icon: bike1,
-        });
-    }
 
-    // Toggle All Markers
+    // set event listener to make marker bounce on click
+    marker.addListener("click", toggleBounce);
 
-    // Hide markers.
-    function hideMarkers() {
-        location.reload();
-        //showMarkers.setMapOnAll(null);
-    };
-
-    function toggleData() {
-        if (toggleButton.innerHTML == "on") {
-            toggleButton.innerHTML = "off"
-            showMarkers()
-            const tourStops = []
-        } else if (toggleButton.innerHTML == "off") {
-            toggleButton.innerHTML = "on";
-            hideMarkers()
+    function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
         } else {
-            null
+            marker.setAnimation(google.maps.Animation.BOUNCE);
         }
     }
 
-    // Toggle Bike Route
-
-    function toggleData2() {
-        if (toggleButton.innerHTML == "Show-Route") {
-            toggleButton.innerHTML = "Hide-Route"
-            showBike1()
-            const tourStops = []
-        } else if (toggleButton.innerHTML == "Hide-Route") {
-            toggleButton.innerHTML = "Show-Route";
-            showBike1()
-        } else {
-            null
+    function drop() {
+        clearMarkers();
+        for (let i = 0; i < neighborhoods.length; i++) {
+            addMarkerWithTimeout(neighborhoods[i], i * 200);
         }
     }
 
-    const toggleButton = document.getElementById("toggle-activity");
-    const toggleBike1 = document.getElementById("bike");
+    function addMarkerWithTimeout(position, timeout) {
+        window.setTimeout(() => {
+            markers.push(
+                new google.maps.Marker({
+                    position: position,
+                    map,
+                    animation: google.maps.Animation.DROP,
+                })
+            );
+        }, timeout);
+    }
 
+    function clearMarkers() {
+        for (let i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
 
-    toggleButton.addEventListener("click", toggleData)
-    toggleButton.addEventListener("click", showBike1)
-    toggleButton.addEventListener("click", toggleRoute)
+        markers = [];
+    }
+
 }

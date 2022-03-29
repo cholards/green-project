@@ -24,59 +24,32 @@
 
 </head>
 
-<body>
-
-
+<body id="page">
 
     <!--   BEGINIG OF PROFILE TAB-->
 
 
-
-    </div>
-    <div class="profile">
-        <div id="avatar">
-            <img src="https://s5.favim.com/orig/54/black-and-white-hair-men-robert-Favim.com-532511.jpg" />
-        </div>
-        <div id="cover"></div>
-        <div id="cover2"></div>
-        <div id="info">
-            <ul>
-                <li id="drv-username"> DRIVER's NAME</li>
-                <li> <strong>TRIPS:</strong> 20</li>
-                <li> <strong>GRADE:</strong> Expert</li>
-                <li> <strong>LICENSE:</strong> 5555 55</li>
-            </ul>
-        </div>
-        <div class="clear"></div>
-        <div id="logo">
-            <img src="http://identitystandards.acm.org/sigs/SIGCOMM_Transparent_White.png" />
-        </div>
-    </div>
-
-
-    <!--END OF PROFILE TAB-->
-
     <div id="map"></div>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAklqHBWOPk3SOn13wVuiBkfvLUwO1GkkQ&callback=initMap&libraries=&v=weekly" async></script>
+    <!-- Async script executes immediately -->
 
-
-    <button id="toggle-activity">on</button>
-    <button id="bike">Show-Route</button>
-
-    </div>
     <nav class="main-menu">
-        <br> <br> <br> <br> <br> <br> <br><br> <br>
-
-
-
 
         <div>
 
         </div>
 
         <div class="scrollbar" id="style-1">
+            <div id="avatar">
+                <img id="drvimage" />
+            </div>
+
+            <div id="profileDisp">
+                <div><span id="drvname"></span></div>
+                <div>TRIPS COMPLETED: <span id="trips"></span> </div>
+                <div>TAG : <span id="uniqueIdentity"></span> </div>
+                <div>MEDALS: <span id="medals"></span> </div>
+            </div>
 
             <ul>
 
@@ -87,10 +60,10 @@
                     </a>
                 </li>
 
-                <li>
+                <li id="toggleChargingStations">
                     <a href="#">
                         <i class="fa fa-user fa-lg"></i>
-                        <span class="nav-text">Fleet</span>
+                        <span class="nav-text">Charging Stations</span>
                     </a>
                 </li>
 
@@ -121,11 +94,10 @@
             </ul>
     </nav>
 
-
-
-
-
     <script src="assets/js/functionlapage.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAklqHBWOPk3SOn13wVuiBkfvLUwO1GkkQ&callback=initMap&libraries=&v=weekly" async></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+
 </body>
 
 </html>
