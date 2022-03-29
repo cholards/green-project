@@ -85,7 +85,7 @@ function initMap() {
         position: reading,
         map: map,
         // Set martker animation
-        // animation: google.maps.Animation.DROP,
+        animation: google.maps.Animation.DROP,
         icon: image,
         draggable: true,
     });
