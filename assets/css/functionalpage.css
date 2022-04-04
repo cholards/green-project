@@ -348,3 +348,14 @@ nav.main-menu li.active>a,
     font-size: x-small;
     color: rgb(31, 29, 29);
 }
+#showChrg {}
+#srcInfo {
+    position: fixed;
+    color: white;
+    font-size: x-small;
+    top: 0px;
+    width: auto;
+    background: #747474;
+    right: 0px;
+    padding: 10px;
+}

@@ -30,6 +30,14 @@
 
 
     <div id="map"></div>
+    <div id="srcInfo">
+        <div id="showChrg"></div>
+        <div id="lat1"></div>
+        <div id="lng1"></div>
+        <div id="showChrg"></div>
+
+    </div>
+
 
     <!-- Async script executes immediately -->
 
@@ -53,32 +61,32 @@
 
             <ul>
 
-                <li>
+                <li id="reset">
                     <a href="#">
                         <i class="fa fa-home fa-lg"></i>
-                        <span class="nav-text">Home</span>
+                        <span class="nav-text">RESET ALL To DEFAULTS</span>
                     </a>
                 </li>
 
                 <li id="toggleChargingStations">
                     <a href="#">
                         <i class="fa fa-user fa-lg"></i>
-                        <span class="nav-text">Charging Stations</span>
+                        <span class="nav-text">TOGLLE CHARGIN STATIONS</span>
                     </a>
                 </li>
 
 
-                <li>
+                <li id="setOrigin">
                     <a href="#">
                         <i class="fa fa-envelope-o fa-lg"></i>
-                        <span class="nav-text">Infrastructure</span>
+                        <span class="nav-text">SET ORIGIN & DEST</span>
                     </a>
                 </li>
 
                 <li class="darkerli">
                     <a href="#">
                         <i class="fa fa-glass fa-lg"></i>
-                        <span class="nav-text">SALES</span>
+                        <span class="nav-text">MAP MY ROUTE</span>
                     </a>
                 </li>
                 <li id="logout-btn" class="darkerli">
@@ -97,6 +105,48 @@
     <script src="assets/js/functionlapage.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAklqHBWOPk3SOn13wVuiBkfvLUwO1GkkQ&callback=initMap&libraries=&v=weekly" async></script>
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+
+    <div style="width: 200px; height: 200px; background: red; color:aliceblue" id="">
+        <form>
+            <input type="text" name="" id="testa">
+
+
+            <div id="floating-panel">
+                <b>Start: </b>
+                <select id="start">
+                  <option value="chicago, il">Chicago</option>
+                  <option value="st louis, mo">St Louis</option>
+                  <option value="joplin, mo">Joplin, MO</option>
+                  <option value="oklahoma city, ok">Oklahoma City</option>
+                  <option value="amarillo, tx">Amarillo</option>
+                  <option value="gallup, nm">Gallup, NM</option>
+                  <option value="flagstaff, az">Flagstaff, AZ</option>
+                  <option value="winona, az">Winona</option>
+                  <option value="kingman, az">Kingman</option>
+                  <option value="barstow, ca">Barstow</option>
+                  <option value="san bernardino, ca">San Bernardino</option>
+                  <option value="los angeles, ca">Los Angeles</option>
+                </select>
+                <b>End: </b>
+                <select id="end">
+                  <option value="chicago, il">Chicago</option>
+                  <option value="st louis, mo">St Louis</option>
+                  <option value="joplin, mo">Joplin, MO</option>
+                  <option value="oklahoma city, ok">Oklahoma City</option>
+                  <option value="amarillo, tx">Amarillo</option>
+                  <option value="gallup, nm">Gallup, NM</option>
+                  <option value="flagstaff, az">Flagstaff, AZ</option>
+                  <option value="winona, az">Winona</option>
+                  <option value="kingman, az">Kingman</option>
+                  <option value="barstow, ca">Barstow</option>
+                  <option value="san bernardino, ca">San Bernardino</option>
+                  <option value="los angeles, ca">Los Angeles</option>
+                </select>
+            </div>
+
+
+        </form>
+    </div>
 
 </body>
 
