@@ -163,7 +163,6 @@ function initMap() {
     truck.addListener("click", toggleBounce);
     truck.addListener("click", openTruckInfo);
 
-
     var truckInfoWindow = new google.maps.InfoWindow({
         content: `Hello <strong> ${loggedinUserInfo.fullName}</strong> <br> Use this icon to set the location where your journey begins on the map. We are currently working on a new feature that will let the app auto-locate your current possition by automatically pick your GPS coordinates. <br><br><strong><small>Feel free to drag the icon around</small></strong>`
     })
@@ -234,25 +233,17 @@ function initMap() {
     }
 
 
-    truck.addListener("dragend", updateOrigin);
-
-    function updateOrigin() {
-        console.log(localStorage.getItem("original"))
-    }
-
-
-
 
     // DIRECTION SERVICE
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
     directionsRenderer.setMap(map);
-
-
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
     calculateAndDisplayRoute(directionsService, directionsRenderer);
 
-
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        const selectedMode = "DRIVING";
+
         directionsService
             .route({
                 origin: currentTripInfo.origin,
@@ -260,7 +251,7 @@ function initMap() {
                 // Note that Javascript allows us to access the constant
                 // using square brackets and a string value as its
                 // "property."
-                travelMode: "DRIVING",
+                travelMode: google.maps.TravelMode[selectedMode],
             })
             .then((response) => {
                 directionsRenderer.setDirections(response);
